@@ -20,8 +20,8 @@ class WeatherBox extends React.Component {
     }
   }
 
-  fetchData(lat, lon, key, unit) {
-    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=${unit}`)
+  fetchData(lat, lon, key, _unit) {
+    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`)
       .then(response => response.json())
       .then(data => {
         this.getWeather(data)
@@ -71,13 +71,7 @@ class WeatherBox extends React.Component {
       icon = weatherIcon.icon
     }
 
-    if (data.sys.country === "US") {
-      var temperature = String(Math.round(data.main.temp)) + '\xB0 F'
-    }
-    else {
-      var temperature = String(Math.round(data.main.temp)) + '\xB0 C'
-    }
-
+    const temperature = String(Math.round(data.main.temp)) + '\xB0 C'
     let link = `https://darksky.net/forecast/${String(settings.latitude)},${String(settings.longitude)}/us12/en`;
     this.setState({ temperature: temperature, icon: icon, desc: data.main.description, link: link})
   }
@@ -105,7 +99,7 @@ class WeatherBox extends React.Component {
     return (
       <>
       <div class="text-center items-center justify-center translate-x-0 translate-y-0">
-        <h1 title={this.state.desc} class="text-3xl pt-5 text-off-white1">{this.state.temperature}</h1>
+        <h1 title={this.state.desc} class="text-2xl pt-5 text-off-white1">{this.state.temperature}</h1>
         <a class="flex justify-center text-5xl text-off-white1" href="">
           <span class="text-grey group-hover:text-blue-500">{this.state.icon}</span>
         </a>
