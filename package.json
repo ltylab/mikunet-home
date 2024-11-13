@@ -1,6 +1,5 @@
 {
-  "name": "start-page",
-  "version": "0.1.0",
+  "name": "mikunet-home",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.18",
